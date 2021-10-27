@@ -18,6 +18,21 @@ https://stackoverflow.com/questions/46028200/rselenium-connection-refused-error
 docker run -d -p 4445:4444 selenium/standalone-chrome
 ## Conection and Packages
 ```{r pacakges}
+
+
+#What is RSelenium and when is it useful
+
+#key features?
+
+
+
+
+
+#how can we use it
+#best with docker 
+#connect to server 
+
+
 library(RSelenium)
 library(xaringan)
 con <- remoteDriver (remoteServerAddr = "localhost",
@@ -25,6 +40,48 @@ con <- remoteDriver (remoteServerAddr = "localhost",
                      browserName = "chrome")
 con$open()
 con$getStatus()
+
+#useful commands
+#con$navigate
+#con$goBack()
+#con$goForward()
+#con$getCurrentUrl()
+#con$refresh()
+
+
+
+#elem_1<- con$findElement(using="name", value="g")
+#elem_2<- con$getElementAttribute("name") # ("class")/("id")
+#elem_3 <- con$findElement(using="id", value="aaa")
+
+#using Xpath 
+
+#elem_4<- con$findElement(using="xpath", "//pastexpath")
+
+#sending text to elements
+
+#elem_5 <- con$sendKeysToActiveElement(list("Rcran", "\u007"))
+#elem_5 <- con$sendKeysToActiveElement(list("Rcran", key="enter"))
+
+                                      
+
+
+
+
+
+#where to learn more?
+
+
+
+
+
+
+
+
+
+
+
+
 ```
 
 ##
