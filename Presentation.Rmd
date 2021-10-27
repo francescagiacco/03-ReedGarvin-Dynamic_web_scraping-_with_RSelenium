@@ -15,7 +15,7 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 https://stackoverflow.com/questions/46028200/rselenium-connection-refused-error
-docker run -d -p 4445:4444 selenium/standalone-chrome
+docker run -d -p 4445:4444 selenium/standalone-chrome -role hub
 ## Conection and Packages
 ```{r pacakges}
 
@@ -34,12 +34,18 @@ docker run -d -p 4445:4444 selenium/standalone-chrome
 
 
 library(RSelenium)
-library(xaringan)
-con <- remoteDriver (remoteServerAddr = "localhost",
-                     port = 4445,
-                     browserName = "chrome")
-con$open()
-con$getStatus()
+library(rvest)
+library(xml2)
+library(tidyverse)
+
+
+remDr <- RSelenium::remoteDriver (remoteServerAddr = "localhost",
+                     port = 4444L,
+                     browserName = "firefox")
+remDr$open()
+remDr<- remDr[["client"]]
+remDr$navigate("https://www.google.com")
+
 
 #useful commands
 #con$navigate
@@ -82,6 +88,20 @@ con$getStatus()
 
 
 
+
+
+
+remDr$navigate("https://apps.who.int/bloodproducts/snakeantivenoms/database/SearchFrm.aspx")
+```
+
+
+```{r pacakges}
+
+
+```
+
+
+```{r pacakges}
 ```
 
 ##
