@@ -19,25 +19,26 @@ docker run -d -p 4445:4444 selenium/standalone-chrome -role hub
 ## Conection and Packages
 ```{r pacakges}
 library(RSelenium)
-library(xaringan)
 library(rvest)
 library(xml2)
 library(tidyverse)
+remDR <- RSelenium::remoteDriver (remoteServerAddr = "localhost",
+                     port = 4444L,
+                     browserName = "firefox")
+remDR$open()
+remDR <- remDR[["cleint"]]
+remDR$navigate("https://www.google.com")
 
 
-remDr <- RSelenium::remoteDriver (remoteServerAddr = "localhost",
-                     port = 4445,
-                     browserName = "chrome")
-remDr$open()
 
 
-remDr$navigate("https://apps.who.int/bloodproducts/snakeantivenoms/database/SearchFrm.aspx")
+
 ```
 
 
 ```{r pacakges}
 
-
+remDr$closeServer()
 ```
 
 
