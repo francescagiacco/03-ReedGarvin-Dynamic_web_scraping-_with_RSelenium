@@ -37,22 +37,51 @@ library(RSelenium)
 library(rvest)
 library(xml2)
 library(tidyverse)
-remDR <- RSelenium::remoteDriver (remoteServerAddr = "localhost",
-                     port = 4444L,
-                     browserName = "firefox")
-remDR$open()
-remDR <- remDR[["cleint"]]
-remDR$navigate("https://www.google.com")
-               
+library(selkselKeys)
+system("java -version")
                
                
 remDr <- RSelenium::remoteDriver (remoteServerAddr = "localhost",
                      port = 4444L,
                      browserName = "firefox")
 remDr$open()
-remDr<- remDr[["client"]]
-remDr$navigate("https://www.google.com")
+remDr$navigate("https://www.instagram.com/")
 
+
+#accept cookies 
+accept_all<- remDr$findElements(using="class", value="a00lW bIiDR ")
+
+accept_all_xpath<- "/html/body/div[4]/div/div/button[1]"
+accept_all_2<-remDr$findElements(using="xpath", value= accept_all_xpath)
+
+
+accept_all
+
+accepted<- accept_all$clickElement()
+accepted2<- accept_all_2$clickElement()
+
+
+getCurrentUrl()
+
+
+
+
+
+#LOGIN
+
+username<- remDr$findElements(using="name", value="username")
+highlightElement(username)
+
+username
+
+username$sendKeysToElement(list("francigiacco"))
+
+
+
+username_xpath <- "/html/body/div[1]/div/div/form/div/div[1]/div/label/input"
+username1 <- remDr$findElements(using="xpath", value=username_xpath)
+username1
+close()
 
 #useful commands
 #con$navigate
