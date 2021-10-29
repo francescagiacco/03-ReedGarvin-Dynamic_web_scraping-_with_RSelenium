@@ -1,0 +1,106 @@
+---
+title: "selenium last try/cry"
+author: "Francesca"
+date: "29/10/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+# load RSelenium
+library(tidyverse)
+library(rvest)
+library(RSelenium)
+
+# initiate Selenium driver
+
+remDr <- RSelenium::remoteDriver (remoteServerAddr = "localhost",
+                     port = 4444L,
+                     browserName = "firefox")
+remDr$open()
+
+
+# start browser, navigate to page
+#go to hertie 
+
+url <- "https://www.hertie-school.org/en/"
+remDr$navigate(url)
+
+# accepting cookies  with xpath
+
+accept_all_xpath<-'/html/body/div[3]/div/form/div[2]/button[1]'
+
+
+acceptAllElem<-remDr$findElement(using='xpath', value=accept_all_xpath)
+acceptAllElem$clickElement()
+
+#search
+
+xpath_search<- "/html/body/div[2]/div[1]/div[1]/nav[1]/div/div[2]/form/div/button[2]/span"
+
+searchElem<- remDr$findElement(using="xpath", value=xpath_search)
+
+searchElem$clickElement()
+
+#type into search bar
+
+xpath_search_type<- "/html/body/div[2]/div[1]/div[1]/nav[1]/div/div[2]/form/div/input"
+searchTypeElem<- remDr$findElement(using="xpath", value=xpath_search_type)
+searchTypeElem$clickElement()
+
+searchTypeElem$sendKeysToElement(list("Campus tour"))
+
+#search
+xpath_search2<-"/html/body/div[2]/div[1]/div[1]/nav[1]/div/div[2]/form/div/button[2]"
+
+searchElem2<- remDr$findElement(using="xpath", value=xpath_search2)
+searchElem2$clickElement()
+
+
+tour_xpath<- '/html/body/div[2]/div/div[2]/div/div/div/div/div/div/div[5]/div[2]/div/a/header/h2/span'
+tourElem<-remDr$findElement(using="xpath", value=tour_xpath)
+
+tourElem$clickElement()
+
+
+#go back to frontpage
+remDr$goBack() 
+remDr$goBack()
+
+remDr$goForward()
+
+# scroll to end of page 
+scrollElem <- remDr$findElement("css", "body")
+scrollElem$sendKeysToElement(list(key = "end"))
+
+#close page
+
+
+
+#close
+
+remDr$closeWindow()
+remDr$closeServer()
+
+
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
