@@ -16,7 +16,6 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 ```{r cars}
-summary(cars)
 
 
 ## setup R + RSelenium -------------------------
@@ -27,6 +26,7 @@ library(rvest)
 library(RSelenium)
 
 # initiate Selenium driver
+
 remDr <- RSelenium::remoteDriver (remoteServerAddr = "localhost",
                      port = 4444L,
                      browserName = "firefox")
@@ -39,19 +39,83 @@ remDr$open()
 url <- "https://www.kayak.com/"
 remDr$navigate(url)
 
-# accepting cookies 
+# accepting cookies  with xpath
 accept_all_xpath<- '//*[@id="onetrust-accept-btn-handler"]'
-acceptAllElem<-remDr$findElement(using='xpath', value= accept_all_xpath)
+
+#accept all with another xpath (?)
+
+accept_all_path2<-' //*[@id="vttr-accept"]'
+acceptAllElem<-remDr$findElement(using='xpath', value=accept_all_xpath2)
+
+#accept all with id
+acceptAllElem3<- remDr$findElement(using="id", value="H6dt-accept")
 
 
-acceptAllElem$clickElement()
+acceptAllElem3$clickElement()
+
+#deciding destination 
+
+xpath_dest<- "/html/body/div[1]/div[1]/main/div[1]/div[1]/div/div[1]/div/div/section[2]/div/div/div/div/div/div[1]/div[2]/div/div[3]/div/div"
+
+destElem<- remDr$findElement(using="xpath", value=xpath_dest)
+
+
+
+destElem$clickElement()
+
+#it worked until here!!
+
+
+
+
+
+
+
+
+#this is to type specific destination
+
+destination_xpath<-'/html/body/div[46]/div/div[2]/div[1]/div[2]/div/input'
+destTypeElem <- remDr$findElement(using='xpath', value= destination_xpath)
+
+destTypeElem <- remDr$findElement(using='class', value="k_my-input")
+
+destTypeElem$clickElement()
+
+destTypeElem$sendKeysToElement(list(key = "Tokyo"))
+
+
+#click on can't decide
+
+xpath_cant_decide<- '//*[@id="aCCQ"]/div[47]/div/div[2]/div[2]/div/ul/li/button/div[2]/span[2]'
+cantDecideElem<-remDr$findElement(using='xpath',              value=xpath_cant_decide) 
+
+cantDecideElem2<- remDr$findElement(using="class", value="hpCj hpCj-pres-item-horizon hpCj-clickable hpCj-anywhere")
+
+cantDecideElem2$clickElement()
+
+
+
+
+
+
+
+
+destiElem<-remDr$findElement("class", "k_my-input")
+destiElem$clickElement()
+
+destiElem$sendKeysToElement(list(key = "Tokyo"))
+
+
+
+
+
 
 #going to kayak.com 
 
 
-xpath_kayak<- '//*[@id="Zen_"]/div/div[1]/div[1]/div[1]/div/span/a'
+#xpath_kayak<- '//*[@id="Zen_]/div/div[1]/div[1]/div[1]/div/span/a'
 
-kayakComElem<- remDr$findElement(using='xpath', value= 'xpath_kayak')
+kayakComElem<- remDr$findElement(using='class', value='UKS8-redirect-link')
 
 
 
@@ -64,6 +128,8 @@ kayakComElem$highlightElement()
 css<- '#Zen_ > div > div.fv-6-header > div.FbPt.FbPt-position-top.FbPt-relative > div.FbPt-content-col > div > span > a'
 titleElem <- remDr$findElement(using = 'css', value = css)
 titleElem$click()
+
+
 
 
 
@@ -104,7 +170,7 @@ head(titles)
 
 
 
-
+install.packages("RSelenium")
 
 
 
