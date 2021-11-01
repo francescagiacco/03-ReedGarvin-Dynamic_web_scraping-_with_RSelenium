@@ -1,45 +1,85 @@
 ---
-title: "RSelenium final script"
-author: "Francesca and Reed"
-date: "29/10/2021"
-output: html_document
+title: "RSelenium"
+subtitle: "Dynamic Webscraping with RSelenium"
+author: "Francesca Giacco, Reed Garvin"
+date: "04/11/2021"
+output: 
+  html_document:
+    toc: true
+    toc_collapsed: true
+    toc_float: true
+    toc_depth: 3
+    code_folding: show
+    number_sections: false
+    theme: lumen
+    highlight: tango
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+# Welcome to our tutorial!
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+The tutorial will show how we can interact with dynamic webpages using **RSelenium**. 
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+In particular, we will show how to:
+* navigate 
+* click on elements
+* highlight elements 
+* type into search bars
+* go back and forward 
+* close the page
 
-```{r cars}
+First of all, however, we will have to initiate the driver and load the necessary packages. 
+We will use **Docker** and **Firefox**, so to follow along make sure to have them set up. 
 
-# load RSelenium and other packages
+# Loading RSelenium and other packages
+```{r}
 library(tidyverse)
 library(rvest)
 library(RSelenium)
+library(emojifont)
+
+```
 
 
-# initiate Selenium driver
+# Initiate Selenium driver
+
+Notes: activate Docker and make sure that the number of the port running corresponds to the one in the code. We use Firefox because it works better than Chrome. 
+
+To see if the code works, before opening the remote driver, open the local host on which you are working (?) 
+```{r}
 
 remDr <- RSelenium::remoteDriver (remoteServerAddr = "localhost",
                      port = 4444L,
                      browserName = "firefox")
 remDr$open()
 
+```
 
-# start browser, navigate to page
-#go to Hertie's website
 
+
+
+# Start browser and work on the webpage
+
+Make sure that when you create variables which refer to elements in the webpage you call them with a name containing **"Elem"**. Otherwise, R will not recognize the functions as such. 
+
+**Navigate to the page**
+We will connect to Hertie's website and try intreracting with it. 
+```{r}
 url <- "https://www.hertie-school.org/en/"
 remDr$navigate(url)
 
 
-# accepting cookies  with xpath
+```
 
+
+
+
+**Accept cookies  with xpath**
+Note: We are only using xpaths, but you could also use css, id, class by typing after using="".  
+```{r}
 accept_all_xpath<-'/html/body/div[3]/div/form/div[2]/button[1]'
 
 
@@ -47,8 +87,13 @@ acceptAllElem<-remDr$findElement(using='xpath', value=accept_all_xpath)
 acceptAllElem$clickElement()
 
 
-#search
+```
 
+
+
+
+**Select the search bar and highlight it**
+```{r}
 xpath_search<- "/html/body/div[2]/div[1]/div[1]/nav[1]/div/div[2]/form/div/button[2]/span"
 
 searchElem<- remDr$findElement(using="xpath", value=xpath_search)
@@ -56,24 +101,42 @@ searchElem<- remDr$findElement(using="xpath", value=xpath_search)
 searchElem$clickElement()
 searchElem$highlightElement()
 
+```
 
-#type into search bar
 
+
+
+
+**Type into search bar**
+```{r}
 xpath_search_type<- "/html/body/div[2]/div[1]/div[1]/nav[1]/div/div[2]/form/div/input"
 searchTypeElem<- remDr$findElement(using="xpath", value=xpath_search_type)
 searchTypeElem$clickElement()
 
 searchTypeElem$sendKeysToElement(list("Campus tour"))
 
-#search
+
+```
+
+
+
+
+**Click on search**
+```{r}
 xpath_search2<-"/html/body/div[2]/div[1]/div[1]/nav[1]/div/div[2]/form/div/button[2]"
 
 searchElem2<- remDr$findElement(using="xpath", value=xpath_search2)
 searchElem2$clickElement()
 
 
-# take a tour 
 
+```
+
+
+
+
+**Click on "take a tour"**
+```{r}
 tour_xpath<- "/html/body/div[2]/div/div[2]/div/div/div/div/div/div/div[5]/div[2]/div/a/header/h2/span"
 tourElem<-remDr$findElement(using="xpath", value=tour_xpath)
 
@@ -81,34 +144,44 @@ tourElem<-remDr$findElement(using="xpath", value=tour_xpath)
 tourElem$highlightElement()
 tourElem$clickElement()
 
+```
 
 
-#go back to frontpage
+
+
+**Go back and forward**
+```{r}
 remDr$goBack() 
 remDr$goBack()
 
 remDr$goForward()
 
-# scroll to end of page 
+```
+
+
+**Scroll to end of page**
+```{r}
 scrollElem <- remDr$findElement("css", "body")
 scrollElem$sendKeysToElement(list(key = "end"))
 
+```
 
-#close the page
+
+
+# Close the page and the server
+```{r}
 
 remDr$closeWindow()
 remDr$closeServer()
 
+```
+
+# Credits 
+
+
+
 
 
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
