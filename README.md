@@ -27,7 +27,7 @@ Reed Garvin presented the slide recording as well as the setup for selenium.
 
 ## Instructors
 Simon Munzert
-## Further Recourses
+## Further Resources
 Further resources
 
 - Rselenium overview on [Github](https://github.com/ropensci/RSelenium)
