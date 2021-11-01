@@ -41,23 +41,23 @@ remDr$navigate(url)
 
 # accepting cookies  with xpath
 accept_all_xpath<- '//*[@id="onetrust-accept-btn-handler"]'
-
+acceptAllElem<-remDr$findElement(using='xpath', value=accept_all_xpath)
 #accept all with another xpath (?)
 
 accept_all_path2<-' //*[@id="vttr-accept"]'
-acceptAllElem<-remDr$findElement(using='xpath', value=accept_all_xpath2)
+acceptAllElem<-remDr$findElement(using='xpath', value=acceptAllElem3)
 
 #accept all with id
 acceptAllElem3<- remDr$findElement(using="id", value="H6dt-accept")
 
 
-acceptAllElem3$clickElement()
+acceptAllElem$clickElement()
 
 #deciding destination 
 
-xpath_dest<- "/html/body/div[1]/div[1]/main/div[1]/div[1]/div/div[1]/div/div/section[2]/div/div/div/div/div/div[1]/div[2]/div/div[3]/div/div"
+xpath_dest<- '/html/body/div[46]/div/div[2]/div[1]/div[2]/div/input'
 
-destElem<- remDr$findElement(using="xpath", value=xpath_dest)
+destElem<- remDr$findElement(using='xpath', value=xpath_dest)
 
 
 
