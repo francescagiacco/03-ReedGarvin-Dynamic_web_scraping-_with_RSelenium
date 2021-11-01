@@ -14,7 +14,7 @@ The goals of this session are to (1) To show you the required steps to get Rsele
 ## Statement of Contributions
 
 
-Reed Garvin and Francesca Giacco prepared the practice material and as well as completed the back reserach on how to operate selenium.
+Reed Garvin and Francesca Giacco prepared the practice material and as well as completed the back research on how to operate selenium.
 
 Francesca Giacco prepared the presentation slides. She also ran the live demo.
 
@@ -28,7 +28,6 @@ Reed Garvin presented the slide recording as well as the setup for selenium.
 ## Instructors
 Simon Munzert
 ## Further Resources
-Further resources
 
 - Rselenium overview on [Github](https://github.com/ropensci/RSelenium)
 - General information on Selenium as well as the driver download https://www.selenium.dev
