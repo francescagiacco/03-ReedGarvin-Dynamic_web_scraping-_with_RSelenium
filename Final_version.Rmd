@@ -23,13 +23,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 The tutorial will show how we can interact with dynamic webpages using **RSelenium**. 
 
-In particular, we will show how to:
-* navigate 
-* click on elements
-* highlight elements 
-* type into search bars
-* go back and forward 
-* close the page
+In particular, we will show how to navigate,  click on elements,  highlight elements, type into search bars,  go back and forward,  close the page.
 
 First of all, however, we will have to initiate the driver and load the necessary packages. 
 We will use **Docker** and **Firefox**, so to follow along make sure to have them set up. 
@@ -39,7 +33,6 @@ We will use **Docker** and **Firefox**, so to follow along make sure to have the
 library(tidyverse)
 library(rvest)
 library(RSelenium)
-library(emojifont)
 
 ```
 
@@ -176,7 +169,7 @@ remDr$closeServer()
 
 ```
 
-# Credits 
+Thanks for listening!
 
 
 

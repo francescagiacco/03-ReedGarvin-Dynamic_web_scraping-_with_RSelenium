@@ -355,7 +355,7 @@ div.tocify {
 <div id="welcome-to-our-tutorial" class="section level1">
 <h1>Welcome to our tutorial!</h1>
 <p>The tutorial will show how we can interact with dynamic webpages using <strong>RSelenium</strong>.</p>
-<p>In particular, we will show how to: * navigate * click on elements * highlight elements * type into search bars * go back and forward * close the page</p>
+<p>In particular, we will show how to navigate, click on elements, highlight elements,type into search bars, go back and forward, close the page.</p>
 <p>First of all, however, we will have to initiate the driver and load the necessary packages. We will use <strong>Docker</strong> and <strong>Firefox</strong>, so to follow along make sure to have them set up.</p>
 </div>
 <div id="loading-rselenium-and-other-packages" class="section level1">
@@ -375,8 +375,7 @@ div.tocify {
 <pre><code>## The following object is masked from &#39;package:readr&#39;:
 ## 
 ##     guess_encoding</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RSelenium)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emojifont)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RSelenium)</span></code></pre></div>
 </div>
 <div id="initiate-selenium-driver" class="section level1">
 <h1>Initiate Selenium driver</h1>
@@ -409,10 +408,10 @@ div.tocify {
 ## [1] FALSE
 ## 
 ## $`moz:processID`
-## [1] 189
+## [1] 184
 ## 
 ## $`moz:profile`
-## [1] &quot;/tmp/rust_mozprofilebjBHPM&quot;
+## [1] &quot;/tmp/rust_mozprofileeyo1d4&quot;
 ## 
 ## $`moz:shutdownTimeout`
 ## [1] 60000
@@ -427,7 +426,7 @@ div.tocify {
 ## [1] &quot;normal&quot;
 ## 
 ## $platformName
-## [1] &quot;linux&quot;
+## [1] &quot;ANY&quot;
 ## 
 ## $platformVersion
 ## [1] &quot;5.10.16.3-microsoft-standard-WSL2&quot;
@@ -436,7 +435,7 @@ div.tocify {
 ## named list()
 ## 
 ## $`se:vnc`
-## [1] &quot;ws://172.17.0.2:4444/session/1ba43360-f718-4f91-9707-28ef416e2a9d/se/vnc&quot;
+## [1] &quot;ws://172.17.0.2:4444/session/1382cc46-8525-4bd3-89d2-6a029bf07ede/se/vnc&quot;
 ## 
 ## $`se:vncEnabled`
 ## [1] TRUE
@@ -465,7 +464,7 @@ div.tocify {
 ## [1] &quot;dismiss and notify&quot;
 ## 
 ## $id
-## [1] &quot;1ba43360-f718-4f91-9707-28ef416e2a9d&quot;</code></pre>
+## [1] &quot;1382cc46-8525-4bd3-89d2-6a029bf07ede&quot;</code></pre>
 </div>
 <div id="start-browser-and-work-on-the-webpage" class="section level1">
 <h1>Start browser and work on the webpage</h1>
@@ -524,9 +523,7 @@ div.tocify {
 ## [101] 32 66 73 65 6c 65 6e 69 75 6d 2d 73 65 72 76 65 72 5c 75 30 30 32 66 64 72
 ## [126] 69 76 65 72 5c 75 30 30 32 66 22 2c 0a 20 20 20 20 22 73 74 61 63 6b 74 72
 ## [151] 61 63 65 22 3a 20 22 22 0a 20 20 7d 0a 7d</code></pre>
-</div>
-<div id="credits" class="section level1">
-<h1>Credits</h1>
+<p>Thanks for listening!</p>
 <p>```</p>
 </div>
 
