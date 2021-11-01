@@ -354,12 +354,13 @@ div.tocify {
 
 <div id="welcome-to-our-tutorial" class="section level1">
 <h1>Welcome to our tutorial!</h1>
-<p>The tutorial will show how we can interact with dynamic webpages using <strong>RSelenium</strong>.</p>
-<p>In particular, we will show how to navigate, click on elements, highlight elements,type into search bars, go back and forward, close the page.</p>
+<p>The tutorial will show how we can interact with dynamic webpages using <code>RSelenium</code>.</p>
+<p>In particular, we will show how to navigate, click on elements, highlight elements, type into search bars, go back and forward, close the page.</p>
 <p>First of all, however, we will have to initiate the driver and load the necessary packages. We will use <strong>Docker</strong> and <strong>Firefox</strong>, so to follow along make sure to have them set up.</p>
+<hr />
 </div>
 <div id="loading-rselenium-and-other-packages" class="section level1">
-<h1>Loading RSelenium and other packages</h1>
+<h1>Loading <strong>RSelenium</strong> and other packages</h1>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <pre><code>## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --</code></pre>
 <pre><code>## v ggplot2 3.3.5     v purrr   0.3.4
@@ -376,11 +377,12 @@ div.tocify {
 ## 
 ##     guess_encoding</code></pre>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RSelenium)</span></code></pre></div>
+<hr />
 </div>
 <div id="initiate-selenium-driver" class="section level1">
 <h1>Initiate Selenium driver</h1>
 <p>Notes: activate Docker and make sure that the number of the port running corresponds to the one in the code. We use Firefox because it works better than Chrome.</p>
-<p>To see if the code works, before opening the remote driver, open the local host on which you are working (?)</p>
+<p>To see if the code works, before opening the remote driver, open the local host.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>remDr <span class="ot">&lt;-</span> RSelenium<span class="sc">::</span><span class="fu">remoteDriver</span> (<span class="at">remoteServerAddr =</span> <span class="st">&quot;localhost&quot;</span>,</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">port =</span> 4444L,</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">browserName =</span> <span class="st">&quot;firefox&quot;</span>)</span>
@@ -408,10 +410,10 @@ div.tocify {
 ## [1] FALSE
 ## 
 ## $`moz:processID`
-## [1] 184
+## [1] 1496
 ## 
 ## $`moz:profile`
-## [1] &quot;/tmp/rust_mozprofileeyo1d4&quot;
+## [1] &quot;/tmp/rust_mozprofileYrxvX4&quot;
 ## 
 ## $`moz:shutdownTimeout`
 ## [1] 60000
@@ -435,7 +437,7 @@ div.tocify {
 ## named list()
 ## 
 ## $`se:vnc`
-## [1] &quot;ws://172.17.0.2:4444/session/1382cc46-8525-4bd3-89d2-6a029bf07ede/se/vnc&quot;
+## [1] &quot;ws://172.17.0.2:4444/session/f4c573d4-63dd-4329-9d14-e0bd2083b4e1/se/vnc&quot;
 ## 
 ## $`se:vncEnabled`
 ## [1] TRUE
@@ -464,53 +466,73 @@ div.tocify {
 ## [1] &quot;dismiss and notify&quot;
 ## 
 ## $id
-## [1] &quot;1382cc46-8525-4bd3-89d2-6a029bf07ede&quot;</code></pre>
+## [1] &quot;f4c573d4-63dd-4329-9d14-e0bd2083b4e1&quot;</code></pre>
+<hr />
 </div>
 <div id="start-browser-and-work-on-the-webpage" class="section level1">
 <h1>Start browser and work on the webpage</h1>
 <p>Make sure that when you create variables which refer to elements in the webpage you call them with a name containing <strong>“Elem”</strong>. Otherwise, R will not recognize the functions as such.</p>
-<p><strong>Navigate to the page</strong> We will connect to Hertie’s website and try intreracting with it.</p>
+<div id="navigate-to-the-page" class="section level3">
+<h3>Navigate to the page</h3>
+<p>We will connect to Hertie’s website and try intreracting with it.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&quot;https://www.hertie-school.org/en/&quot;</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>remDr<span class="sc">$</span><span class="fu">navigate</span>(url)</span></code></pre></div>
-<p><strong>Accept cookies with xpath</strong> Note: We are only using xpaths, but you could also use css, id, class by typing after using=&quot;&quot;.</p>
+</div>
+<div id="accept-cookies-with-xpath" class="section level3">
+<h3>Accept cookies with xpath</h3>
+<p>Note: We are only using xpaths, but you could also use css, id, class by typing after using=&quot;&quot;.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>accept_all_xpath<span class="ot">&lt;-</span><span class="st">&#39;/html/body/div[3]/div/form/div[2]/button[1]&#39;</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>acceptAllElem<span class="ot">&lt;-</span>remDr<span class="sc">$</span><span class="fu">findElement</span>(<span class="at">using=</span><span class="st">&#39;xpath&#39;</span>, <span class="at">value=</span>accept_all_xpath)</span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>acceptAllElem<span class="sc">$</span><span class="fu">clickElement</span>()</span></code></pre></div>
-<p><strong>Select the search bar and highlight it</strong></p>
+</div>
+<div id="select-the-search-bar-and-highlight-it" class="section level3">
+<h3>Select the search bar and highlight it</h3>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>xpath_search<span class="ot">&lt;-</span> <span class="st">&quot;/html/body/div[2]/div[1]/div[1]/nav[1]/div/div[2]/form/div/button[2]/span&quot;</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>searchElem<span class="ot">&lt;-</span> remDr<span class="sc">$</span><span class="fu">findElement</span>(<span class="at">using=</span><span class="st">&quot;xpath&quot;</span>, <span class="at">value=</span>xpath_search)</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>searchElem<span class="sc">$</span><span class="fu">clickElement</span>()</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>searchElem<span class="sc">$</span><span class="fu">highlightElement</span>()</span></code></pre></div>
-<p><strong>Type into search bar</strong></p>
+</div>
+<div id="type-into-search-bar" class="section level3">
+<h3>Type into search bar</h3>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>xpath_search_type<span class="ot">&lt;-</span> <span class="st">&quot;/html/body/div[2]/div[1]/div[1]/nav[1]/div/div[2]/form/div/input&quot;</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>searchTypeElem<span class="ot">&lt;-</span> remDr<span class="sc">$</span><span class="fu">findElement</span>(<span class="at">using=</span><span class="st">&quot;xpath&quot;</span>, <span class="at">value=</span>xpath_search_type)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>searchTypeElem<span class="sc">$</span><span class="fu">clickElement</span>()</span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>searchTypeElem<span class="sc">$</span><span class="fu">sendKeysToElement</span>(<span class="fu">list</span>(<span class="st">&quot;Campus tour&quot;</span>))</span></code></pre></div>
-<p><strong>Click on search</strong></p>
+</div>
+<div id="click-on-search" class="section level3">
+<h3>Click on search</h3>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>xpath_search2<span class="ot">&lt;-</span><span class="st">&quot;/html/body/div[2]/div[1]/div[1]/nav[1]/div/div[2]/form/div/button[2]&quot;</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>searchElem2<span class="ot">&lt;-</span> remDr<span class="sc">$</span><span class="fu">findElement</span>(<span class="at">using=</span><span class="st">&quot;xpath&quot;</span>, <span class="at">value=</span>xpath_search2)</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>searchElem2<span class="sc">$</span><span class="fu">clickElement</span>()</span></code></pre></div>
-<p><strong>Click on “take a tour”</strong></p>
+</div>
+<div id="click-on-take-a-tour" class="section level3">
+<h3>Click on “take a tour”</h3>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>tour_xpath<span class="ot">&lt;-</span> <span class="st">&quot;/html/body/div[2]/div/div[2]/div/div/div/div/div/div/div[5]/div[2]/div/a/header/h2/span&quot;</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>tourElem<span class="ot">&lt;-</span>remDr<span class="sc">$</span><span class="fu">findElement</span>(<span class="at">using=</span><span class="st">&quot;xpath&quot;</span>, <span class="at">value=</span>tour_xpath)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>tourElem<span class="sc">$</span><span class="fu">highlightElement</span>()</span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>tourElem<span class="sc">$</span><span class="fu">clickElement</span>()</span></code></pre></div>
-<p><strong>Go back and forward</strong></p>
+</div>
+<div id="go-back-and-forward" class="section level3">
+<h3>Go back and forward</h3>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>remDr<span class="sc">$</span><span class="fu">goBack</span>() </span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>remDr<span class="sc">$</span><span class="fu">goBack</span>()</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>remDr<span class="sc">$</span><span class="fu">goForward</span>()</span></code></pre></div>
-<p><strong>Scroll to end of page</strong></p>
+</div>
+<div id="scroll-to-end-of-page" class="section level3">
+<h3>Scroll to end of page</h3>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>scrollElem <span class="ot">&lt;-</span> remDr<span class="sc">$</span><span class="fu">findElement</span>(<span class="st">&quot;css&quot;</span>, <span class="st">&quot;body&quot;</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>scrollElem<span class="sc">$</span><span class="fu">sendKeysToElement</span>(<span class="fu">list</span>(<span class="at">key =</span> <span class="st">&quot;end&quot;</span>))</span></code></pre></div>
+<hr />
+</div>
 </div>
 <div id="close-the-page-and-the-server" class="section level1">
 <h1>Close the page and the server</h1>
@@ -523,7 +545,8 @@ div.tocify {
 ## [101] 32 66 73 65 6c 65 6e 69 75 6d 2d 73 65 72 76 65 72 5c 75 30 30 32 66 64 72
 ## [126] 69 76 65 72 5c 75 30 30 32 66 22 2c 0a 20 20 20 20 22 73 74 61 63 6b 74 72
 ## [151] 61 63 65 22 3a 20 22 22 0a 20 20 7d 0a 7d</code></pre>
-<p>Thanks for listening!</p>
+<hr />
+<p><strong>Thanks for listening!</strong></p>
 <p>```</p>
 </div>
 

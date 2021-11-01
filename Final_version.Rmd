@@ -19,29 +19,32 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
 # Welcome to our tutorial!
 
-The tutorial will show how we can interact with dynamic webpages using **RSelenium**. 
+The tutorial will show how we can interact with dynamic webpages using `RSelenium`. 
 
 In particular, we will show how to navigate,  click on elements,  highlight elements, type into search bars,  go back and forward,  close the page.
 
 First of all, however, we will have to initiate the driver and load the necessary packages. 
 We will use **Docker** and **Firefox**, so to follow along make sure to have them set up. 
 
-# Loading RSelenium and other packages
+***
+
+# Loading **RSelenium** and other packages 
 ```{r}
 library(tidyverse)
 library(rvest)
 library(RSelenium)
-
 ```
 
+***
 
 # Initiate Selenium driver
 
 Notes: activate Docker and make sure that the number of the port running corresponds to the one in the code. We use Firefox because it works better than Chrome. 
 
-To see if the code works, before opening the remote driver, open the local host on which you are working (?) 
+To see if the code works, before opening the remote driver, open the local host.
 ```{r}
 
 remDr <- RSelenium::remoteDriver (remoteServerAddr = "localhost",
@@ -51,14 +54,16 @@ remDr$open()
 
 ```
 
-
+***
 
 
 # Start browser and work on the webpage
 
 Make sure that when you create variables which refer to elements in the webpage you call them with a name containing **"Elem"**. Otherwise, R will not recognize the functions as such. 
 
-**Navigate to the page**
+
+### Navigate to the page
+
 We will connect to Hertie's website and try intreracting with it. 
 ```{r}
 url <- "https://www.hertie-school.org/en/"
@@ -70,7 +75,8 @@ remDr$navigate(url)
 
 
 
-**Accept cookies  with xpath**
+### Accept cookies  with xpath
+
 Note: We are only using xpaths, but you could also use css, id, class by typing after using="".  
 ```{r}
 accept_all_xpath<-'/html/body/div[3]/div/form/div[2]/button[1]'
@@ -85,7 +91,7 @@ acceptAllElem$clickElement()
 
 
 
-**Select the search bar and highlight it**
+### Select the search bar and highlight it 
 ```{r}
 xpath_search<- "/html/body/div[2]/div[1]/div[1]/nav[1]/div/div[2]/form/div/button[2]/span"
 
@@ -100,7 +106,7 @@ searchElem$highlightElement()
 
 
 
-**Type into search bar**
+### Type into search bar
 ```{r}
 xpath_search_type<- "/html/body/div[2]/div[1]/div[1]/nav[1]/div/div[2]/form/div/input"
 searchTypeElem<- remDr$findElement(using="xpath", value=xpath_search_type)
@@ -114,7 +120,7 @@ searchTypeElem$sendKeysToElement(list("Campus tour"))
 
 
 
-**Click on search**
+### Click on search
 ```{r}
 xpath_search2<-"/html/body/div[2]/div[1]/div[1]/nav[1]/div/div[2]/form/div/button[2]"
 
@@ -128,7 +134,7 @@ searchElem2$clickElement()
 
 
 
-**Click on "take a tour"**
+### Click on "take a tour"
 ```{r}
 tour_xpath<- "/html/body/div[2]/div/div[2]/div/div/div/div/div/div/div[5]/div[2]/div/a/header/h2/span"
 tourElem<-remDr$findElement(using="xpath", value=tour_xpath)
@@ -142,7 +148,7 @@ tourElem$clickElement()
 
 
 
-**Go back and forward**
+### Go back and forward 
 ```{r}
 remDr$goBack() 
 remDr$goBack()
@@ -152,14 +158,14 @@ remDr$goForward()
 ```
 
 
-**Scroll to end of page**
+### Scroll to end of page 
 ```{r}
 scrollElem <- remDr$findElement("css", "body")
 scrollElem$sendKeysToElement(list(key = "end"))
 
 ```
 
-
+***
 
 # Close the page and the server
 ```{r}
@@ -168,8 +174,9 @@ remDr$closeWindow()
 remDr$closeServer()
 
 ```
+***
 
-Thanks for listening!
+**Thanks for listening!**
 
 
 
